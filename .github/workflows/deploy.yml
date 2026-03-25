@@ -8,18 +8,17 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: 检出代码
+        uses: actions/checkout@v4
 
       - name: 安装Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
+          node-version: 22
+          cache: 'npm'
 
       - name: 安装依赖
-        run: npm ci
+        run: npm install
 
       - name: 构建博客
         run: npm run docs:build
@@ -28,4 +27,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v4
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/.vitepress/dist
+          publish_dir: ./docs/.vitepress/dist
