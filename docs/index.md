@@ -3,11 +3,7 @@ layout: home
 hero:
   name: 刘承奕的技术博客
   text: 记录成长 · 分享知识
-  tagline: 专注于 C++ 后端、计算机基础与生活随笔
   actions:
-    - theme: brand
-      text: 开始阅读 →
-      link: /cpp-notes/01-setup
     - theme: alt
       text: 了解我
       link: /about
@@ -16,12 +12,9 @@ features:
   - title: 🚀 C++ 学习笔记
     details: 从基础到进阶，系统记录 C++ 语法、内存模型与多线程核心知识
     link: /cpp-notes/
-  - title: 💻 计算机基础
-    details: 操作系统、计算机网络与数据结构的学习总结
-    link: /cs-basics/
-  - title: 📝 生活随笔
-    details: 记录日常思考、项目复盘与生活感悟
-    link: /life-notes/
+  - title: 🐧 Linux 系统学习笔记
+    details: Linux 系统原理、命令行操作、系统管理与网络配置
+    link: /linux-notes/
 ---
 
 <style>
@@ -33,10 +26,15 @@ features:
 }
 
 /* 渐变标题 */
+.VPHome .hero {
+  text-align: left;
+  margin-bottom: 3rem;
+}
+
 .VPHome .hero .name {
-  font-size: 3rem;
+  font-size: 2.5rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.5rem;
   background: linear-gradient(90deg, #6366f1, #8b5cf6);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -44,23 +42,17 @@ features:
 
 /* 副标题 */
 .VPHome .hero .text {
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   color: #6b7280;
-  margin-bottom: 2rem;
-}
-
-/* 描述文字 */
-.VPHome .hero .tagline {
-  font-size: 1.1rem;
-  color: #9ca3af;
-  margin-bottom: 2.5rem;
+  margin-bottom: 1.5rem;
 }
 
 /* 按钮布局 */
 .VPHome .actions {
   display: flex;
   gap: 1rem;
-  justify-content: center;
+  justify-content: flex-start;
+  margin-bottom: 3rem;
 }
 
 /* 特性卡片布局 */

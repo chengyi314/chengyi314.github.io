@@ -11,7 +11,7 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: 'C++学习笔记', link: '/cpp-notes' },
-      { text: '生活随笔', link: '/life-notes' }
+      { text: 'Linux系统学习笔记', link: '/linux-notes/' }
     ],
 
     // 侧边栏（根据不同分类展示文章）
@@ -25,11 +25,12 @@ export default defineConfig({
           ]
         }
       ],
-      '/life-notes/': [
+      '/linux-notes/': [
         {
-          text: '生活记录',
+          text: 'Linux 基础入门',
           items: [
-            { text: '第一次部署博客', link: '/life-notes/01-deploy-blog' }
+            { text: '环境搭建', link: '/linux-notes/01-setup' },
+            { text: 'Hello World', link: '/linux-notes/02-hello' }
           ]
         }
       ]
