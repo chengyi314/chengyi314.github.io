@@ -1,30 +1,60 @@
-name: 部署博客到GitHub Pages
+# 这是GitHub官方为VitePress提供的工作流模板
+name: Deploy VitePress Site to Pages
+
 on:
+  # 每当代码推送到main分支时自动运行
   push:
     branches: [ main ]
+  # 允许手动从Actions页面触发
   workflow_dispatch:
 
+# 给予GitHub Pages足够的权限
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# 允许并发部署
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
 jobs:
-  deploy:
+  # 构建阶段
+  build:
     runs-on: ubuntu-latest
     steps:
       - name: 检出代码
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 如果需要基于提交历史构建，请保留此项
 
-      - name: 安装Node.js
+      - name: 设置Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 22
+          node-version: 20
           cache: 'npm'
 
       - name: 安装依赖
-        run: npm install
+        run: npm ci
 
-      - name: 构建博客
+      - name: 构建VitePress
         run: npm run docs:build
 
-      - name: 部署到GitHub Pages
-        uses: peaceiris/actions-gh-pages@v4
+      - name: 上传Pages构件
+        uses: actions/upload-pages-artifact@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./docs/.vitepress/dist
+          # 构建产物目录
+          path: docs/.vitepress/dist
+
+  # 部署阶段
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: 部署到GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
